@@ -97,9 +97,9 @@ angular.module('app.controllers', [])
    
 .controller('loginCtrl', function($scope,$http,$ionicPopup,$state,$ionicHistory) {
 		$scope.user = {};
-		
+		//file server added
 		$scope.login = function() {
-			str="http://www.mywebsite.com/foodcart/server_side/user-details.php?e="+$scope.user.email+"&p="+$scope.user.password;
+			str="http://www.darajeh1.com/service/freets/api/users.php?e="+$scope.user.email+"&p="+$scope.user.password;
 			$http.get(str)
 			.success(function (response){
 				$scope.user_details = response.records;
