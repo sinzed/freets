@@ -72,20 +72,25 @@ angular.module('app.services', [])
 .factory('sharedFilterService', [function(){
 
 	var obj = {};
-    obj.str = "http://www.mywebsite.com/foodcart/server_side/food_menu.php";
+//        obj.str = "http://www.mywebsite.com/foodcart/server_side/food_menu.php";
+        obj.str = "http://www.darajeh1.com/service/freets/api/users.php";
 	obj.sort = "";
 	obj.search = "";
 	obj.category = "";
 	
 	obj.getUrl=function(){
 		if(obj.sort!="" && obj.category!=""){
-			obj.str="http://www.mywebsite.com/foodcart/server_side/food_menu.php?category="+obj.category+"&sort="+obj.sort;
-		}
+//			obj.str="http://www.mywebsite.com/foodcart/server_side/food_menu.php?category="+obj.category+"&sort="+obj.sort;
+			obj.str="http://www.darajeh1.com/service/freets/api/users.php?category="+obj.category+"&sort="+obj.sort;
+                }
 		else if(obj.category!="" ){
-			obj.str="http://www.mywebsite.com/foodcart/server_side/food_menu.php?category="+obj.category;
+                        
+//			obj.str="http://www.mywebsite.com/foodcart/server_side/food_menu.php?category="+obj.category;
+                        obj.str = "http://www.darajeh1.com/service/freets/api/users.php";
 		}
 		else if(obj.sort!=""){  
-			obj.str="http://www.mywebsite.com/foodcart/server_side/food_menu.php?sort="+obj.sort;
+//			obj.str="http://www.mywebsite.com/foodcart/server_side/food_menu.php?sort="+obj.sort;
+                        obj.str = "http://www.darajeh1.com/service/freets/api/users.php";
 		}
 		return obj.str;
 	};

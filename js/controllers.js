@@ -99,15 +99,20 @@ angular.module('app.controllers', [])
 		$scope.user = {};
 		//file server added
 		$scope.login = function() {
-			str="http://www.darajeh1.com/service/freets/api/users.php?e="+$scope.user.email+"&p="+$scope.user.password;
-			$http.get(str)
-			.success(function (response){
-				$scope.user_details = response.records;
-				sessionStorage.setItem('loggedin_name', $scope.user_details.u_name);
-				sessionStorage.setItem('loggedin_id', $scope.user_details.u_id );
+			var link="http://www.darajeh1.com/service/freets/api/controllers.php";
+			var action = "loginUser";
+                        $http.post(link, {
+                            action : action, 
+                            email : $scope.user.email,
+                            password : $scope.user.password 
+                        })
+			.then(function (response){
+                                $scope.user_details = response.data.records;
+                                console.log(response.records);
+                            if($scope.user_details.is_user == "true"){
+                                sessionStorage.setItem('loggedin_name', $scope.user_details.u_name);
 				sessionStorage.setItem('loggedin_phone', $scope.user_details.u_phone);
 				sessionStorage.setItem('loggedin_address', $scope.user_details.u_address);
-				sessionStorage.setItem('loggedin_pincode', $scope.user_details.u_pincode);
 				
 				$ionicHistory.nextViewOptions({
 					disableAnimate: true,
@@ -117,13 +122,17 @@ angular.module('app.controllers', [])
 				console.log('Last View',lastView);
 				if(lastView.stateId=="checkOut"){ $state.go('checkOut', {}, {location: "replace", reload: true}); }
 				else{$state.go('profile', {}, {location: "replace", reload: true});}
-				
-			}).error(function() {
-					var alertPopup = $ionicPopup.alert({
-						title: 'Login failed!',
+                                
+                            }
+                            else {
+                                					var alertPopup = $ionicPopup.alert({
+						title: 'Login failed!!!',
 						template: 'Please check your credentials!'
 					});
-			});
+                                
+                            }
+				
+			})
 		};
 		
 })
@@ -132,16 +141,21 @@ angular.module('app.controllers', [])
 
 	$scope.signup=function(data){
 			
-			var link = 'http://www.mywebsite.com/foodcart/server_side/signup.php';
-			$http.post(link, {n : data.name, un : data.username, ps : data.password , ph: data.phone , add : data.address , pin : data.pincode })
+//			var link = 'http://www.mywebsite.com/foodcart/server_side/signup.php';
+                        var link = "http://www.darajeh1.com/service/freets/api/controllers.php";
+                        var action = "createUser";
+			$http.post(link, {
+                            action : action, 
+                            name : data.name, 
+                            email : data.email,
+                            password : data.password ,
+                            phone: data.phone,
+                            address : data.address })
 			.then(function (res){	
 				$scope.response = res.data.result; 
-				
-
-				
 				if($scope.response.created=="1"){
-					$scope.title="Account Created!";
-					$scope.template="Your account has been successfully created!";
+					$scope.title="Account Created!!";
+					$scope.template="Your account has been successfully created!!!";
 					
 					//no back option
 					$ionicHistory.nextViewOptions({
@@ -152,7 +166,7 @@ angular.module('app.controllers', [])
 				
 				}else if($scope.response.exists=="1"){
 					$scope.title="Email Already exists";
-					$scope.template="Please click forgot password if necessary";
+					$scope.template="Please click forgot password if necessary ;)";
 				
 				}else{
 					$scope.title="Failed";
