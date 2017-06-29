@@ -154,8 +154,8 @@ angular.module('app.controllers', [])
 			.then(function (res){	
 				$scope.response = res.data.result; 
 				if($scope.response.created=="1"){
-					$scope.title="Account Created!";
-					$scope.template="Your account has been successfully created!";
+					$scope.title="Account Created!!";
+					$scope.template="Your account has been successfully created!!!";
 					
 					//no back option
 					$ionicHistory.nextViewOptions({
@@ -166,7 +166,7 @@ angular.module('app.controllers', [])
 				
 				}else if($scope.response.exists=="1"){
 					$scope.title="Email Already exists";
-					$scope.template="Please click forgot password if necessary";
+					$scope.template="Please click forgot password if necessary ;)";
 				
 				}else{
 					$scope.title="Failed";
