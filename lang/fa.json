@@ -1,0 +1,5 @@
+
+var language = {
+  language: "en",
+  registered: "حساب کاربری ساخته شد "
+}

@@ -1,10 +1,15 @@
+
 <ion-view title="Signup">
     <ion-content padding="'true'" scroll="false" class="has-header">
+        
         <form class="list">
             <ion-list>
-
+                <script src="lang/fa.json"></script>
+                <script> $scope.language = language; </script>
+                
+               
                 <label class="item item-input">
-                    <span class="input-label">Email</span>
+                    <span class="input-label">{{ language.language }}</span>
                     <input type="email" placeholder="" ng-model="data.email">
                 </label>
                 <label class="item item-input">
